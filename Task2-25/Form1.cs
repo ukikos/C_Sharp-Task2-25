@@ -59,8 +59,7 @@ namespace Task2_25
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             string filename = openFileDialog1.FileName;
-            string fileText = File.ReadAllText(filename);
-            string text = fileText;
+            string text = File.ReadAllText(filename);
 
             textBox.Text = ReplaceWords(text, replaceWordTextBox.Text, replaceByTextBox.Text);
         }
@@ -70,8 +69,7 @@ namespace Task2_25
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             string filename = openFileDialog1.FileName;
-            string fileText = File.ReadAllText(filename);
-            string text = fileText;
+            string text = File.ReadAllText(filename);
 
             string s = ReplaceWords(text, replaceWordTextBox.Text, replaceByTextBox.Text);
             textBox.Text = s;
