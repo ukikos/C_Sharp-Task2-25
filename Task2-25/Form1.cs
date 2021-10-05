@@ -59,8 +59,7 @@ namespace Task2_25
             string replaceBy = replaceByTextBox.Text;
             string text = textBox.Text;
 
-            string s = Regex.Replace(text, @"\b" + replaceWord + @"\b", @"" + replaceBy + "", RegexOptions.IgnoreCase);
-            textBox.Text = s;
+            textBox.Text = ReplaceWords(text, replaceWord, replaceBy);
 
         }
 
@@ -76,8 +75,7 @@ namespace Task2_25
             string replaceWord = replaceWordTextBox.Text;
             string replaceBy = replaceByTextBox.Text;
 
-            string s = Regex.Replace(text, @"\b" + replaceWord + @"\b", @"" + replaceBy + "", RegexOptions.IgnoreCase);
-            textBox.Text = s;
+            textBox.Text = ReplaceWords(text, replaceWord, replaceBy);
         }
 
         private void overwriteButton_Click(object sender, EventArgs e)
@@ -92,7 +90,7 @@ namespace Task2_25
             string replaceWord = replaceWordTextBox.Text;
             string replaceBy = replaceByTextBox.Text;
 
-            string s = Regex.Replace(text, @"\b" + replaceWord + @"\b", @"" + replaceBy + "", RegexOptions.IgnoreCase);
+            string s = ReplaceWords(text, replaceWord, replaceBy);
             textBox.Text = s;
 
             File.WriteAllText(filename, s);
@@ -101,6 +99,12 @@ namespace Task2_25
                 "Сообщение",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        private string ReplaceWords(string text, string replaceWord, string replaceBy)
+        {
+            string s = Regex.Replace(text, @"\b" + replaceWord + @"\b", @"" + replaceBy + "", RegexOptions.IgnoreCase);
+            return s;
         }
     }
 }
