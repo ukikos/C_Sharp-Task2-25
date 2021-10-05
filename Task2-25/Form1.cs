@@ -31,8 +31,7 @@ namespace Task2_25
 
             string filename = openFileDialog1.FileName;
             filePath = filename;
-            string fileText = File.ReadAllText(filename);
-            textBox.Text = fileText;
+            textBox.Text = File.ReadAllText(filename);
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -45,21 +44,13 @@ namespace Task2_25
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             string filename = saveFileDialog1.FileName;
-            File.WriteAllText(filename, textBox.Text);
-            MessageBox.Show(
-                "Файл сохранен",
-                "Сообщение",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            WriteTextInFile(filename, textBox.Text);
         }
 
         private void replaceButton_Click(object sender, EventArgs e)
         {
-            string replaceWord = replaceWordTextBox.Text;
-            string replaceBy = replaceByTextBox.Text;
             string text = textBox.Text;
-
-            textBox.Text = ReplaceWords(text, replaceWord, replaceBy);
+            textBox.Text = ReplaceWords(text, replaceWordTextBox.Text, replaceByTextBox.Text);
 
         }
 
@@ -67,44 +58,41 @@ namespace Task2_25
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
-
             string filename = openFileDialog1.FileName;
             string fileText = File.ReadAllText(filename);
             string text = fileText;
 
-            string replaceWord = replaceWordTextBox.Text;
-            string replaceBy = replaceByTextBox.Text;
-
-            textBox.Text = ReplaceWords(text, replaceWord, replaceBy);
+            textBox.Text = ReplaceWords(text, replaceWordTextBox.Text, replaceByTextBox.Text);
         }
 
         private void overwriteButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
-
             string filename = openFileDialog1.FileName;
             string fileText = File.ReadAllText(filename);
             string text = fileText;
 
-            string replaceWord = replaceWordTextBox.Text;
-            string replaceBy = replaceByTextBox.Text;
-
-            string s = ReplaceWords(text, replaceWord, replaceBy);
+            string s = ReplaceWords(text, replaceWordTextBox.Text, replaceByTextBox.Text);
             textBox.Text = s;
 
-            File.WriteAllText(filename, s);
-            MessageBox.Show(
-                "Файл сохранен",
-                "Сообщение",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            WriteTextInFile(filename, s);
         }
 
         private string ReplaceWords(string text, string replaceWord, string replaceBy)
         {
             string s = Regex.Replace(text, @"\b" + replaceWord + @"\b", @"" + replaceBy + "", RegexOptions.IgnoreCase);
             return s;
+        }
+
+        private void WriteTextInFile(string path, string text)
+        {
+            File.WriteAllText(path, text);
+            MessageBox.Show(
+                "Файл сохранен",
+                "Сообщение",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }
